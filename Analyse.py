@@ -4,7 +4,6 @@
 # Import Libraries
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 import seaborn as sns
 
 # Import the Fisher's Iris data set form the Internet
@@ -16,262 +15,179 @@ df.to_csv(r'Fishers_Iris_Dataset.csv', mode ='w', index = False, header = True)
 
 # Save the data in a Text file and removing the index in the dataframe
 # found this code on the website "https://stackoverflow.com/questions/48432326/remove-index-dataframe-pandas"
-with open('Fishers_Iris_Dataset.txt', 'w') as textfile:
-    textfile.write(df.to_string(index = False))
+with open('Fishers_Iris_Dataset.txt', mode = 'w', newline = '') as textfile:
+    textfile.write(df.to_string(index = False, header = True))
     textfile.close()
 
+# Slice the pandas data set df in the three species "Setosa", "Versicolor" and "Virginica"
+# found on website https://datacarpentry.org/python-ecology-lesson/03-index-slice-subset/
+# Slice the dataframe for Iris Flower Setosa
+setosa = df[0:50]
+
+# Slice the dataframe for Iris Flower Versicolor
+versicolor= df[50:100]
+
+# Slice the dataframe for Iris Flower Viginica
+virginica= df[100:150]
+
 # research for plotting on website "https://matplotlib.org/examples/showcase/anatomy.html", https://pandas.pydata.org/ and 
-# https://matplotlib.org/3.2.0/api/_as_gen/matplotlib.pyplot.hist.html
+# https://seaborn.pydata.org/tutorial/distributions.html
 # Histogram plot for Sepal Length
-plt.hist(df['sepal_length'], histtype = 'bar',rwidth = 0.8,color= '#0000FF')
+sns.distplot(setosa["sepal_length"])
+sns.distplot(setosa["sepal_length"],bins=20, kde=False, color='#0055FF', label='Setosa')
+sns.distplot(versicolor["sepal_length"])
+sns.distplot(versicolor["sepal_length"],bins=20, kde=False,color= '#FFAA00', label='Versicolor')
+sns.distplot(virginica["sepal_length"])
+sns.distplot(virginica["sepal_length"],bins=20, kde=False,color= '#00AA00', label='Virginica')
+plt.legend()
 plt.title("Sepal Length for different Species")
-plt.xlabel("Sepal Length in cm")
+plt.xlabel("Sepal Length")
 plt.ylabel("Distribution of Sepal length")
 plt.savefig("Hist Sepal length.png")
-plt.show()
+
 
 # Histogram plot for Sepal Width
-plt.hist(df['sepal_width'], histtype = 'bar',rwidth = 0.8,color= '#0000FF')
+sns.distplot(setosa["sepal_width"])
+sns.distplot(setosa["sepal_width"],bins=20, kde=False, color='#0055FF', label='Setosa')
+sns.distplot(versicolor["sepal_width"])
+sns.distplot(versicolor["sepal_width"],bins=20, kde=False,color= '#FFAA00', label='Versicolor')
+sns.distplot(virginica["sepal_width"])
+sns.distplot(virginica["sepal_width"],bins=20, kde=False,color= '#00AA00', label='Virginica')
+plt.legend()
 plt.title("Sepal Width for different Species")
-plt.xlabel("Sepal Width in cm")
-plt.ylabel("Distribution of Sepal Width")
+plt.xlabel("Sepal Width")
+plt.ylabel("Distribution of Sepal width")
 plt.savefig("Hist Sepal width.png")
-plt.show()
+
 
 # Histogram plot for Petal Length
-plt.hist(df['petal_length'], histtype = 'bar',rwidth = 0.8,color= '#0000FF')
+sns.distplot(setosa["petal_length"])
+sns.distplot(setosa["petal_length"],bins=20, kde=False, color='#0055FF', label='Setosa')
+sns.distplot(versicolor["petal_length"])
+sns.distplot(versicolor["petal_length"],bins=20, kde=False,color= '#FFAA00', label='Versicolor')
+sns.distplot(virginica["petal_length"])
+sns.distplot(virginica["petal_length"],bins=20, kde=False,color= '#00AA00', label='Virginica')
+plt.legend()
 plt.title("Petal Length for different Species")
-plt.xlabel("Petal Length in cm")
+plt.xlabel("Petal Length")
 plt.ylabel("Distribution of Petal length")
 plt.savefig("Hist Petal length.png")
-plt.show()
+
 
 # Histogram plot for Petal Width
-plt.hist(df['petal_width'], histtype = 'bar',rwidth = 0.8,color= '#0000FF')
+sns.distplot(setosa["petal_width"])
+sns.distplot(setosa["petal_width"],bins=20, kde=False, color='#0055FF', label='Setosa')
+sns.distplot(versicolor["petal_width"])
+sns.distplot(versicolor["petal_width"],bins=20, kde=False,color= '#FFAA00', label='Versicolor')
+sns.distplot(virginica["petal_width"])
+sns.distplot(virginica["petal_width"],bins=20, kde=False,color= '#00AA00', label='Virginica')
+plt.legend()
 plt.title("Petal Width for different Species")
-plt.xlabel("Petal Width in cm")
-plt.ylabel("Distribution of Petal Width")
+plt.xlabel("Petal Width")
+plt.ylabel("Distribution of Petal width")
 plt.savefig("Hist Petal width.png")
-plt.show()
 
+
+# found things on website "https://towardsdatascience.com/data-visualization-using-seaborn-fc24db95a850"
 # Scatter plot for Sepal length vs Sepal width
 sns.scatterplot(x='sepal_length', y='sepal_width', data=df, hue='species')
-plt.title("Sepal Length vs Sepal Width")
-plt.xlabel("Sepal Length in cm")
-plt.ylabel("Sepal Width in cm")
-plt.savefig("Scatter Sepal length vs Sepal width.png")
-plt.show()
+plt.title("Sepal Length vs Sepal Width") 
+plt.xlabel("Sepal Length") 
+plt.ylabel("Sepal Width") 
+plt.savefig("Scatter Sepal length vs Sepal width.png") 
+ 
 
 # Scatter plot for Sepal length vs Petal length
 sns.scatterplot(x='sepal_length', y='petal_length', data=df, hue='species')
 plt.title("Sepal Length vs Petal Length")
-plt.xlabel("Sepal Length in cm")
-plt.ylabel("Petal Length in cm")
+plt.xlabel("Sepal Length")
+plt.ylabel("Petal Length")
 plt.savefig("Scatter Sepal length vs Petal length.png")
-plt.show()
+
 
 # Scatter plot for Sepal length vs Petal width
 sns.scatterplot(x='sepal_length', y='petal_width', data=df, hue='species')
 plt.title("Sepal Length vs Petal Width")
-plt.xlabel("Sepal Length in cm")
-plt.ylabel("Petal Width in cm")
+plt.xlabel("Sepal Length")
+plt.ylabel("Petal Width")
 plt.savefig("Scatter Sepal length vs Petal width.png")
-plt.show()
+
 
 # Scatter plot for Sepal width vs Petal length
 sns.scatterplot(x='sepal_width', y='petal_length', data=df, hue='species')
 plt.title("Sepal Width vs Petal Length")
-plt.xlabel("Sepal Width in cm")
-plt.ylabel("Petal Length in cm")
+plt.xlabel("Sepal Width")
+plt.ylabel("Petal Length")
 plt.savefig("Scatter Sepal width vs Petal length.png")
-plt.show()
+
 
 # Scatter plot for Sepal width vs Petal width
 sns.scatterplot(x='sepal_width', y='petal_width', data=df, hue='species')
 plt.title("Sepal Width vs Petal Width")
-plt.xlabel("Sepal Width in cm")
-plt.ylabel("Petal Width in cm")
+plt.xlabel("Sepal Width")
+plt.ylabel("Petal Width")
 plt.savefig("Scatter Sepal width vs Petal width.png")
-plt.show()
+
 
 # Scatter plot for Petal length vs Petal width
 sns.scatterplot(x='petal_length', y='petal_width', data=df, hue='species')
 plt.title("Petal Length vs Petal Width")
-plt.xlabel("Petal Length in cm")
-plt.ylabel("Petal Width in cm")
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
 plt.savefig("Scatter Petal length vs Petal width.png")
-plt.show()
+
 
 
 # Scatter plot for Sepal length for every species
 sns.scatterplot(x='sepal_length', y='species', data=df, hue='species')
-plt.title("Sepal Length for different Species")
-plt.xlabel("Sepal Length in cm")
-plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,)
-plt.savefig("Sepal length vs Species.png")
-plt.show()
+plt.title("Sepal Length for different Species") 
+plt.xlabel("Sepal Length") 
+plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,) 
+plt.savefig("Sepal length vs Species.png") 
+ 
 
 # Scatter plot for Sepal width for every species
 sns.scatterplot(x='sepal_width', y='species', data=df, hue='species')
 plt.title("Sepal Width for different Species")
-plt.xlabel("Sepal Width in cm")
+plt.xlabel("Sepal Width")
 plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,)
 plt.savefig("Sepal width vs Species.png")
-plt.show()
+
 
 # Scatter plot for Petal length for every species
 sns.scatterplot(x='petal_length', y='species', data=df, hue='species')
 plt.title("Petal Length for different Species")
-plt.xlabel("Petal Length in cm")
+plt.xlabel("Petal Length")
 plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,)
 plt.savefig("Petal length vs Species.png")
-plt.show()
+
 
 # Scatter plot for Petal width for every species
 sns.scatterplot(x='petal_width', y='species', data=df, hue='species')
 plt.title("Petal Width for different Species")
-plt.xlabel("Petal Width in cm")
+plt.xlabel("Petal Width")
 plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,)
 plt.savefig("Petal width vs Species.png")
-plt.show()
 
 
-# Summery of each variable into a text file "Summery"
-summery = []
-summery = df.describe()
-print(summery)
+# Create three new dataframes "setosastats", "versicolorstats" and "virginicastats" for the Iris Flower statistics
+setosastats = setosa.describe()
+versicolorstats = versicolor.describe()
+virginicastats = virginica.describe()
 
-print(summery['petal_length'])
-sepallengthsummery = (summery['sepal_length'])
-sepalwidthsummery = (summery['sepal_width'])
-petallengthsummery = (summery['petal_length'])
-petalwidthsummery = (summery['petal_width'])
+# Writing the Project summery statistics for each Iris Flower in a txt file
+with open('Projectsummery.txt', mode ='w') as textfile:
+    textfile.write("Project Summery Setosa")
+    textfile.write("\n")
+    textfile.write(setosastats.to_string(index = True, header = True))
+    textfile.write("\n\n")
+    textfile.write("Project Summery Versicolor")
+    textfile.write("\n")
+    textfile.write(versicolorstats.to_string(index = True, header= True))
+    textfile.write("\n\n")
+    textfile.write("Project Summery Virginica")
+    textfile.write("\n")
+    textfile.write(virginicastats.to_string(index = True, header= True))
+    textfile.close()
 
-summerydic = {}
-summerydic = df.describe()
-print(summerydic)
-
-with open("Summery.txt", mode = 'w', newline ='') as writeon: 
-    # Sepal Length 
-    writeon.write("stats") 
-    writeon.write("\t") 
-    writeon.write("Sepal Length")
-    writeon.write("\n")
-    writeon.write("\t")     
-    for line in sepallengthsummery:
-        writeon.writelines(str(line))
-        writeon.write("\n")
-        writeon.write("\t")
-    writeon.write("\n") 
-    # Sepal Width
-    writeon.write("stats") 
-    writeon.write("\t") 
-    writeon.write("Sepal Width")
-    writeon.write("\n")
-    writeon.write("\t")     
-    for line in sepalwidthsummery:
-        writeon.writelines(str(line))
-        writeon.write("\n")
-        writeon.write("\t")
-    writeon.write("\n") 
-    # Petal Length 
-    writeon.write("stats") 
-    writeon.write("\t") 
-    writeon.write("Petal Length")
-    writeon.write("\n")
-    writeon.write("\t")     
-    for line in petallengthsummery:
-        writeon.writelines(str(line))
-        writeon.write("\n")
-        writeon.write("\t")
-    writeon.write("\n") 
-    # Petal Width
-    writeon.write("stats") 
-    writeon.write("\t") 
-    writeon.write("Petal Width")
-    writeon.write("\n")
-    writeon.write("\t")     
-    for line in petalwidthsummery:
-        writeon.writelines(str(line))
-        writeon.write("\n")
-        writeon.write("\t")
-    writeon.write("\n") 
-
-
-# working until here
-
-#sepaldescr = df.describe(include=['object'])
-#print(sepaldescr.values)
-#print(sepaldescr)
-#working until here
-
-#np.savetxt('Project Summery.tx',df.describe,fmt='%d',delimiter="\t",header="\tsepal_length\tsepal_width\tpetal_length\tpetal_width")
-#np.savetxt('Project Summery.txt',df.values,fmt='%d',delimiter="\t",header="\tsepal_length\tsepal_width\tpetal_length\tpetal_width")
-
-
-
-with open("Project Summery.txt", mode = 'w', newline ='') as writein:  
-    writein.write("stats") 
-    writein.write("\t")     
-    for line in summery:
-        writein.write(str(line))
-        writein.write("\t")
-    writein.write("\n") 
-
-    writein.write("count") 
-    writein.write("\t")  
-    for count in df.count():        
-        writein.write(str(count))
-        writein.write("\t")  
-    writein.write("\n")
-
-    writein.write("mean") 
-    writein.write("\t")  
-    for mean in df.mean():        
-        writein.write(str(mean))
-        writein.write("\t")  
-    writein.write("\n")
-
-    writein.write("std") 
-    writein.write("\t")  
-    for std in df.std():        
-        writein.write(str(std))
-        writein.write("\t")  
-    writein.write("\n")
-
-    writein.write("min") 
-    writein.write("\t")  
-    for minimum in df.min():        
-        writein.write(str(minimum))
-        writein.write("\t")  
-    writein.write("\n")
-
-# 25%,50%,75%
-
-    writein.write("max") 
-    writein.write("\t")  
-    for maximum in df.max():        
-        writein.write(str(maximum))
-        writein.write("\t")  
-    writein.write("\n")
-
-
-
-
-# write the project Summery in a Text file
-#import csv
-#from itertools import zip_longest
-#d=[summery]
-#export_data = zip_longest(*d, fillvalue ='')
-#with open ("Project Summery.txt", mode = 'w',newline ='') as SummeryFile:
-    #filewriter = csv.writer(SummeryFile, delimiter = '\t',quotechar = '"')
-    #filewriter.writerow(("sepal_length","sepal_width","petal_length","petal_width"))
-    #filewriter.writerows(export_data)
-    #SummeryFile.close()
-      
-
-# Seaborn
-
-
-print("Finshed")
 
