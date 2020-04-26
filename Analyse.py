@@ -144,7 +144,7 @@ plt.title("Sepal Length for different Species")
 plt.xlabel("Sepal Length") 
 plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,) 
 plt.savefig("Sepal length vs Species.png") 
- 
+
 
 # Scatter plot for Sepal width for every species
 sns.scatterplot(x='sepal_width', y='species', data=df, hue='species')
@@ -168,6 +168,40 @@ plt.title("Petal Width for different Species")
 plt.xlabel("Petal Width")
 plt.ylabel("Species",fontsize = 12, position = (0,1.01), color = "#0000FF", rotation = 0,)
 plt.savefig("Petal width vs Species.png")
+
+
+
+# Subplots Petal Length Petal Width
+# found things on website "https://jovianlin.io/data-visualization-seaborn-part-2/"
+fig = plt.figure(figsize=(15,5))
+title = fig.suptitle("Petal Length Petal Witdh", fontsize = 14)
+fig.subplots_adjust(top = 0.85, wspace = 0.3)
+# Subplot Petal Length
+ax1 = fig.add_subplot(1,2,1)
+ax1.set_title("Petal Length")
+sns.distplot(setosa["petal_length"],ax=ax1)
+sns.distplot(setosa["petal_length"],bins=20, kde=False, color='#0055FF', label='Setosa',ax=ax1)
+sns.distplot(versicolor["petal_length"],ax=ax1)
+sns.distplot(versicolor["petal_length"],bins=20, kde=False,color= '#FFAA00', label='Versicolor',ax=ax1)
+sns.distplot(virginica["petal_length"],ax=ax1)
+sns.distplot(virginica["petal_length"],bins=20, kde=False,color= '#00AA00', label='Virginica',ax=ax1)
+ax1.set_xlabel("Petal Length")
+ax1.set_ylabel("Distribution of Petal length")
+plt.legend()
+# Subplot Petal Width
+ax2 = fig.add_subplot(1,2,2)
+ax2.set_title("Petal Width")
+sns.distplot(setosa["petal_width"],ax=ax2)
+sns.distplot(setosa["petal_width"],bins=20, kde=False, color='#0055FF', label='Setosa',ax=ax2)
+sns.distplot(versicolor["petal_width"],ax=ax2)
+sns.distplot(versicolor["petal_width"],bins=20, kde=False,color= '#FFAA00', label='Versicolor',ax=ax2)
+sns.distplot(virginica["petal_width"],ax=ax2)
+sns.distplot(virginica["petal_width"],bins=20, kde=False,color= '#00AA00', label='Virginica',ax=ax2)
+ax2.set_xlabel("Petal Width")
+ax2.set_ylabel("Distribution of Petal width")
+plt.legend()
+plt.savefig("Subplot_Petal.png")
+
 
 
 # Create three new dataframes "setosastats", "versicolorstats" and "virginicastats" for the Iris Flower statistics
